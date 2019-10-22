@@ -15,5 +15,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api/adv/', include('adventure.urls')),
+    # To DEl later
     path('api-token-auth/', views.obtain_auth_token)
 ]
