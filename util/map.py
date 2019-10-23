@@ -1,10 +1,20 @@
 from django.contrib.auth.models import User
-from adventure.models import Player, Room
+from adventure.models import Player, Room, Item
+
+Item.objects.all().delete()
+
+item_dict = {
+    "Sword": Item(item_name="Big Sword", item_description="This is heavy", is_key=False),
+    "Chest Key": Item(item_name="Chest Key", item_description="It opens chests", is_key=True)
+}
+
+for item in item_dict.values():
+    item.save()
 
 Room.objects.all().delete()
 
 room_dict = {
-"r0_0" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=0, y_coord=0),
+"r0_0" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=0, y_coord=0, items={item_dict['Sword'].item_name:item_dict["Sword"].item_description}),
 "r0_1" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=1, y_coord=0),
 "r0_2" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=2, y_coord=0),
 "r0_3" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=3, y_coord=0),
@@ -164,11 +174,7 @@ room_dict = {
 'r9_13' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=13, y_coord=9),
 'r9_14' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=14, y_coord=9)
 }
-"""
-for room in room_dict:
-    if room.xcoord > 0 and room.xcoord < 9 and room.ycoord > 0 and room.ycoor < 9:
-        print('ohhhyea')
-"""
+
 for room in room_dict.values():
     room.save()
 
@@ -201,9 +207,6 @@ def room_linker(room_dict, x_max, y_max):
             east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
             room.connectRooms(room_dict[east], "e")
 
-            #west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
-            #room.connectRooms(room_dict[west], "w")
-
         elif room.x_coord == x_max and room.y_coord > 0 and room.y_coord < y_max:
 
             north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
@@ -211,9 +214,6 @@ def room_linker(room_dict, x_max, y_max):
 
             south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[south], "s")
-
-            #east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
-            #room.connectRooms(room_dict[east], "e")
 
             west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
             room.connectRooms(room_dict[west], "w")
@@ -223,9 +223,6 @@ def room_linker(room_dict, x_max, y_max):
             north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[north], "n")
 
-            #south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
-            #room.connectRooms(room_dict[south], "s")
-
             east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
             room.connectRooms(room_dict[east], "e")
 
@@ -233,8 +230,6 @@ def room_linker(room_dict, x_max, y_max):
             room.connectRooms(room_dict[west], "w")    
 
         elif room.y_coord == y_max and room.x_coord > 0 and room.x_coord < x_max:
-            #north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
-            #room.connectRooms(room_dict[north], "n")
 
             south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[south], "s")
@@ -249,50 +244,28 @@ def room_linker(room_dict, x_max, y_max):
             north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[north], "n")
 
-            #south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
-            #room.connectRooms(None, "s")
-
             east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
             room.connectRooms(room_dict[east], "e")
 
-            #west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
-            #room.connectRooms(None, "w")    
-
         elif room.x_coord == 0 and room.y_coord == y_max:
-            #north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
-            #room.connectRooms(room_dict[north], "n")
 
             south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[south], "s")
 
             east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
-            room.connectRooms(room_dict[east], "e")
-
-            #west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
-            #room.connectRooms(room_dict[west], "w") 
+            room.connectRooms(room_dict[east], "e") 
 
         elif room.x_coord == x_max and room.y_coord == 0:
             north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[north], "n")
 
-            #south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
-            #room.connectRooms(room_dict[south], "s")
-
-            #east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
-            #room.connectRooms(room_dict[east], "e")
-
             west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
             room.connectRooms(room_dict[west], "w")   
 
         elif room.x_coord == x_max and room.y_coord == y_max:
-            #north = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
-            #room.connectRooms(None, "n")
 
             south = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
             room.connectRooms(room_dict[south], "s")
-
-            #east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
-            #room.connectRooms(None, "e")
 
             west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
             room.connectRooms(room_dict[west], "w") 

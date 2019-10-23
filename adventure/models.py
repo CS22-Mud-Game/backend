@@ -1,4 +1,5 @@
 from django.db import models
+from jsonfield import JSONField
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -15,6 +16,7 @@ class Room(models.Model):
     s_to = models.IntegerField(default=0)
     e_to = models.IntegerField(default=0)
     w_to = models.IntegerField(default=0)
+    items = JSONField(max_length=200)
     def connectRooms(self, destinationRoom, direction):
         destinationRoomID = destinationRoom.id
         try:
@@ -48,6 +50,7 @@ class Player(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
+    items = JSONField(max_length=200)
     def initialize(self):
         if self.currentRoom == 0:
             self.currentRoom = Room.objects.first().id
@@ -60,6 +63,12 @@ class Player(models.Model):
             return self.room()
     def __str__(self):
         return f'{self.user}'
+
+class Item(models.Model):
+    item_name = models.CharField(max_length=50, default="DEFAULT TITLE")
+    item_description = models.CharField(max_length=50, default="DEFAULT DESCRIPTION")
+    is_key = models.BooleanField(default=False)
+
 
 @receiver(post_save, sender=User)
 def create_user_player(sender, instance, created, **kwargs):
