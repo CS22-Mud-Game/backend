@@ -97,7 +97,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config(default='postgres://...')
+#DATABASES['default'] = dj_database_url.config(default='postgres://...')
 
 
 # Password validation
@@ -155,4 +155,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 import django_heroku
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']
