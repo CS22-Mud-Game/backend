@@ -18,7 +18,7 @@ pusher = Pusher(app_id=config('PUSHER_APP_ID'), key=config('PUSHER_KEY'), secret
 
 @api_view(["GET"])
 def call_map(request):
-    data = Room.objects.all().values().order_by('id')
+    data = Room.objects.all().values()
     return JsonResponse({"call_map":list(data)})
 
 @api_view(["GET"])
