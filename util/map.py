@@ -299,4 +299,7 @@ def room_linker(room_dict, x_max, y_max):
 
 room_linker(room_dict, 14, 9)
 
-    
+players=Player.objects.all()
+for p in players:
+  p.currentRoom=room_dict['r0_0'].id
+  p.save()
