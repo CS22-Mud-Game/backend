@@ -14,7 +14,7 @@ for item in item_dict.values():
 Room.objects.all().delete()
 
 room_dict = {
-"r0_0" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=0, y_coord=0, items={item_dict['Sword'].item_name:item_dict["Sword"].item_description}),
+"r0_0" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=0, y_coord=0, items={item_dict['Sword'].id:item_dict["Sword"].item_name, item_dict['Chest Key'].id:item_dict['Chest Key'].item_name}),
 "r0_1" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=1, y_coord=0),
 "r0_2" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=2, y_coord=0),
 "r0_3" : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=3, y_coord=0),
