@@ -1941,7 +1941,7 @@ def room_linker(room_dict, x_max, y_max):
             west = 'r'+str(room.y_coord)+'_'+str(room.x_coord-1)
             room.connectRooms(room_dict[west], "w") 
 
-room_linker(room_dict, 14, 9)
+room_linker(room_dict, 59, 29)
 
 players=Player.objects.all()
 for p in players:
