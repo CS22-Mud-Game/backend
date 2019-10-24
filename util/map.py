@@ -327,7 +327,7 @@ room_dict = {
 'r5_5' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=5, y_coord=5),
 'r5_6' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=6, y_coord=5),
 'r5_7' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=7, y_coord=5),
-'r5_8' : Room(title='forest', description='forest', tile='forest/light_forest', x_coord=8, y_coord=5),
+'r5_8' : Room(title='light_forest', description='forest', tile='forest/light_forest', x_coord=8, y_coord=5),
 'r5_9' : Room(title='Your House', description='This is your house', tile='house', x_coord=9, y_coord=5),
 'r5_10' : Room(title='Chest', description='Chest', tile='chest', x_coord=10, y_coord=5),
 'r5_11' : Room(title='grass_tile', description='grass_tile', tile='grass1', x_coord=11, y_coord=5),
