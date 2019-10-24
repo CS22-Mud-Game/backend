@@ -45,7 +45,7 @@ def check_inventory(request):
     for i in item_id.keys():
         items = Item.objects.get(id=i)
         empt_lst.append([items.item_name, items.item_description, items.is_key])
-    return JsonResponse({"items_in_room": empt_lst})
+    return JsonResponse({"items_in_inventory": empt_lst})
 
 @api_view(["POST"])
 def get_item_from_room(request):
