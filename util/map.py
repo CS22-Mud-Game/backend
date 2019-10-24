@@ -1945,5 +1945,5 @@ room_linker(room_dict, 59, 29)
 
 players=Player.objects.all()
 for p in players:
-  p.currentRoom=room_dict['r0_0'].id
+  p.currentRoom=room_dict['r5_9'].id
   p.save()
