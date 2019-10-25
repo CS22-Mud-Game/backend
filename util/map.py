@@ -1903,8 +1903,8 @@ def room_linker(room_dict, x_max, y_max):
 
         elif room.y_coord == y_max and room.x_coord > 0 and room.x_coord < x_max:
 
-            south = 'r'+str(room.y_coord+1)+'_'+str(room.x_coord)
-            room.connectRooms(room_dict[south], "s")
+            north = 'r'+str(room.y_coord-1)+'_'+str(room.x_coord)
+            room.connectRooms(room_dict[north], "n")
 
             east = 'r'+str(room.y_coord)+'_'+str(room.x_coord+1)
             room.connectRooms(room_dict[east], "e")
